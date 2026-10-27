@@ -31,3 +31,4 @@ services:
         value: "true"
       - key: KC_HOSTNAME_STRICT
         value: "false"
+

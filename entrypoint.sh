@@ -37,3 +37,4 @@ exec /opt/keycloak/bin/kc.sh start \
     --hostname-strict=false \
     --import-realm \
     "$@"
+
