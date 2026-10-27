@@ -30,6 +30,34 @@
   },
   "clients": [
     {
+      "clientId": "app-a",
+      "name": "Trung Tâm Công Nghiệp Sáng Tạo (app-a)",
+      "description": "Public Client dùng PKCE cho React Frontend (Client ID app-a)",
+      "rootUrl": "https://creative-industry-center.vercel.app",
+      "baseUrl": "https://creative-industry-center.vercel.app",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://creative-industry-center.vercel.app/*",
+        "http://localhost:5173/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "https://creative-industry-center.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "+"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "https://creative-industry-center.vercel.app/*##http://localhost:5173/*"
+      },
+      "protocol": "openid-connect"
+    },
+    {
       "clientId": "cic-web",
       "name": "Trung Tâm Công Nghiệp Sáng Tạo (React SPA)",
       "description": "Public Client dùng PKCE cho React Frontend",
@@ -58,6 +86,36 @@
       "protocol": "openid-connect"
     },
     {
+      "clientId": "app-b",
+      "name": "Là Việt (app-b)",
+      "description": "Confidential Client cho Next.js Auth (Client ID app-b)",
+      "rootUrl": "https://la-vi-et.vercel.app",
+      "baseUrl": "https://la-vi-et.vercel.app",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "app-b-confidential-secret-key-123456",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://la-vi-et.vercel.app/api/auth/sso-callback",
+        "https://la-vi-et.vercel.app/api/auth/callback/keycloak",
+        "https://la-vi-et.vercel.app/*",
+        "http://localhost:3000/api/auth/sso-callback",
+        "http://localhost:3000/api/auth/callback/keycloak",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "https://la-vi-et.vercel.app",
+        "http://localhost:3000",
+        "+"
+      ],
+      "attributes": {
+        "post.logout.redirect.uris": "https://la-vi-et.vercel.app/*##http://localhost:3000/*"
+      },
+      "protocol": "openid-connect"
+    },
+    {
       "clientId": "laviet-web",
       "name": "Là Việt (Next.js)",
       "description": "Confidential Client cho Next.js Auth.js",
@@ -70,8 +128,10 @@
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
       "redirectUris": [
+        "https://la-vi-et.vercel.app/api/auth/sso-callback",
         "https://la-vi-et.vercel.app/api/auth/callback/keycloak",
         "https://la-vi-et.vercel.app/*",
+        "http://localhost:3000/api/auth/sso-callback",
         "http://localhost:3000/api/auth/callback/keycloak",
         "http://localhost:3000/*"
       ],
@@ -105,7 +165,7 @@
       "credentials": [
         {
           "type": "password",
-          "value": "Password123@",
+          "value": "123456",
           "temporary": false
         }
       ],
@@ -125,7 +185,7 @@
       "credentials": [
         {
           "type": "password",
-          "value": "Password123@",
+          "value": "123456",
           "temporary": false
         }
       ],
