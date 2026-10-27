@@ -89,3 +89,26 @@ Chi tiết đầy đủ xem tại [CREDENTIALS.md](CREDENTIALS.md):
 - **JWKS Certs (Public Key)**: `http://localhost:8888/realms/sso-platform/protocol/openid-connect/certs`
 - **Token Endpoint (POST)**: `http://localhost:8888/realms/sso-platform/protocol/openid-connect/token`
 - **Logout Endpoint**: `http://localhost:8888/realms/sso-platform/protocol/openid-connect/logout`
+
+
+---
+
+## ☁️ Hướng Dẫn Deploy Lên Render.com
+
+Kho mã nguồn đã tích hợp sẵn **\Dockerfile\**, **\entrypoint.sh\** và **ender.yaml\** (Blueprint) để triển khai tự động lên Render:
+
+### Cách 1: Sử dụng Render Blueprint (Khuyên dùng - 1 Click)
+1. Đăng nhập vào [Render.com](https://dashboard.render.com).
+2. Chọn **Blueprints** -> Bấm **New Blueprint Instance**.
+3. Chọn Repository \khoawork/SSO-HUB\.
+4. Render sẽ tự động phát hiện file ender.yaml\ và tạo sẵn:
+   - Cơ sở dữ liệu PostgreSQL (\sso-postgres\).
+   - Web Service chạy Keycloak (\sso-hub\) từ Dockerfile.
+5. Bấm **Apply**. Quá trình build và khởi chạy mất khoảng 3-5 phút.
+
+### Cách 2: Tạo thủ công Web Service trên Render
+1. Tạo một **PostgreSQL Database** trên Render (ví dụ tên \sso-db\). Sao chép mục **Internal Database URL**.
+2. Tạo một **Web Service** mới -> Kết nối với repo \SSO-HUB\ -> Chọn **Docker** runtime.
+3. Trong phần **Environment Variables**, thêm:
+   - \DATABASE_URL\: Dán chuỗi kết nối PostgreSQL vừa tạo ở bước 1.
+   - \KEYCLOAK_ADMIN\: \dmin   - \KEYCLOAK_ADMIN_PASSWORD\: \Mật khẩu quản trị của bạn   - \KC_PROXY\: \edge   - \KC_HTTP_ENABLED\: \	rue   - \KC_HOSTNAME_STRICT\: \alse4. Bấm **Create Web Service**. Hệ thống sẽ tự động chuyển đổi định dạng kết nối JDBC và nạp Realm \sso-platform\.

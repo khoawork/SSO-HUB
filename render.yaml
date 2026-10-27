@@ -1,0 +1,33 @@
+# =============================================================================
+# RENDER BLUEPRINT - DEPLOY KEYCLOAK SSO HUB VÀ POSTGRESQL 1-CLICK
+# =============================================================================
+databases:
+  - name: sso-postgres
+    databaseName: keycloak
+    user: keycloak
+    plan: free
+
+services:
+  - type: web
+    name: sso-hub
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /realms/sso-platform/.well-known/openid-configuration
+    envVars:
+      - key: KC_DB
+        value: postgres
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sso-postgres
+          property: connectionString
+      - key: KEYCLOAK_ADMIN
+        value: admin
+      - key: KEYCLOAK_ADMIN_PASSWORD
+        value: Admin@123456
+      - key: KC_PROXY
+        value: edge
+      - key: KC_HTTP_ENABLED
+        value: "true"
+      - key: KC_HOSTNAME_STRICT
+        value: "false"
